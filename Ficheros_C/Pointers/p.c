@@ -11,8 +11,10 @@ int main()
     int *ptrEdad = &edad;
     double *ptrAlt = &alt;
 
+    // Hace referencia al puntero como dirección
     printf("Edad:%p\nAltura:%p\n", ptrEdad, ptrAlt);
     printf("-----------------\n");
+    // Hace referencia al valor en la dirección del puntero
     printf("Edad:%d\nAltura:%lf\n", *ptrEdad, *ptrAlt);
     return 0;
 }
