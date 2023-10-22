@@ -7,18 +7,18 @@ int main()
     int col;
     char simb[1];
 
-    printf("Introduce el numero de filas\n");
+    printf("Introduce el numero de filas: ");
     scanf("%d", &row);
 
-    printf("Introduce el numero de columnas\n");
+    printf("Introduce el numero de columnas: ");
     scanf("%d", &col);
 
-    // scanf("%c"); // Para quitar el \n
+    scanf("%c"); // Para quitar el \n
 
     printf("Introduce el simbolo para construir: ");
-    fgets(simb, 1, stdin);
+    scanf("%c",&simb);
 
-    printf("%d\t%d\n", col, row);
+   // printf("%d\t%d\n", col, row);
 
     for (int i = 0; i < col; i++)
     {
