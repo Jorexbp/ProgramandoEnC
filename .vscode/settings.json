@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "stdio.h": "c",
-        "array": "c"
+        "array": "c",
+        "time.h": "c"
     }
 }
