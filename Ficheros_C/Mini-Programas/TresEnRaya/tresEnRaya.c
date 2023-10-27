@@ -38,6 +38,8 @@ int main()
         scanf("%d", &opc);
     } while (opc != 0);
     return 0;
+
+    
 }
 
 void mostrarTablero()
@@ -84,6 +86,9 @@ void movJugador()
         {
             printf("Movimiento invalido!\n");
             mostrarTablero();
+        }else if(comprobarEspacios() == 0)
+        {
+            break;
         }
         else
         {
@@ -175,7 +180,7 @@ void mostrarResultado(char ganador)
         printf("EMPATE\n");
         break;
     default:
-        printf("Que");
+       
         break;
     }
 }
