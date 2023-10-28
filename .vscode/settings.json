@@ -4,5 +4,6 @@
         "stdio.h": "c",
         "array": "c",
         "time.h": "c"
-    }
+    },
+    "git.autofetch": true
 }

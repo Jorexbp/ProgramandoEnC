@@ -15,7 +15,5 @@ for (int i = 0; i < MAX_MEM; i++)
    }
    */
 }
-
-
     return 0;
 }
