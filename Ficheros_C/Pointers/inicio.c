@@ -12,9 +12,9 @@ int main()
     printf("\nEdad: %d\tMemoria: %p\n", edad, pEdad);
     printf("Valor en la memoria: %d\n", *pEdad); // dereferenciar
 
-    printf("Tamano del valor: %d\tTamano del puntero: %d\n", sizeof(edad), sizeof(pEdad));
-    // El puntero guarda la addr en hexadecimal ocupa 8 bytes
-
+    printf("Tamano del valor: %ld\tTamano del puntero: %lu\n", sizeof(edad), sizeof(pEdad));
+    // El tamaño del puntero es dos veces el del valor porque el puntero tambien es del mismo tipo 
+   
     mostrarEdad(pEdad);
 
     return 0;
