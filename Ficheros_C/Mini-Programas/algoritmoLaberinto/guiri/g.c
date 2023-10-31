@@ -40,7 +40,7 @@ int main()
     printf("Press Space Bar to watch the X move.\n\n\n");
     getchar();
     mazePrint(mazeone);
-    getchar();
+    getchar(); 
     return 0;
 }
 

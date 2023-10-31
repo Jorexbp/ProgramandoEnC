@@ -5,5 +5,5 @@
         "array": "c",
         "time.h": "c"
     },
-    "git.autofetch": true
+    "git.autofetch": "all"
 }
