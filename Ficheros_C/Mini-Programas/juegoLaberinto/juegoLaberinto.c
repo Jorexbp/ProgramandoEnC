@@ -34,7 +34,6 @@ int main()
     int rowNueva = rowInicial;
     int colNueva = colInicial;
     int usuario;
-    // mostrarTodoLaberinto(laberinto); 11 4
 
     do
     {
