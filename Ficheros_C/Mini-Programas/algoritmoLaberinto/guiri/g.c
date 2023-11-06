@@ -86,7 +86,7 @@ void mazeTraversal(char *maze[12][12])
     maze[y][x] = ".";
 
     switch (face) {
-        case 6:{
+        case 6:{ // IZQ
             if (maze[y][x-1] == ".") {
                 maze[y][x-1] = "x"; 
                 face = 5;
@@ -102,7 +102,7 @@ void mazeTraversal(char *maze[12][12])
             }
              break;
         }
-        case 8:{
+        case 8:{// ARRI
             if (maze[y + 1][x] == ".") {
                 maze[y + 1][x] = "x"; 
                 face = 6;
@@ -118,11 +118,11 @@ void mazeTraversal(char *maze[12][12])
             }
              break;
         }
-        case 4:{
-            if (maze[y][x+1] == ".") {
-                maze[y][x+1] = "x";
-                face = 8;
-            } else if (maze[y - 1][x] == ".") {
+        case 4:{ // DRCH
+                if (maze[y][x+1] == ".") {
+                    maze[y][x+1] = "x";
+                    face = 8;
+                } else if (maze[y - 1][x] == ".") {
                 maze[y - 1][x] = "x"; 
                 face = 4;
             } else if (maze[y][x-1] == ".") {
@@ -133,7 +133,7 @@ void mazeTraversal(char *maze[12][12])
                 face = 6;
             }
              break;
-        }
+        }// ABAJO
         case 5:{
             if (maze[y - 1][x] == ".") {
                 maze[y - 1][x] = "x";
