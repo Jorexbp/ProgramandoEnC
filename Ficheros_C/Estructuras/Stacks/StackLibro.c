@@ -68,8 +68,8 @@ void instructions(void)
 void push(StackNodePtr *topPtr, int info)
 {
     StackNodePtr newPtr = malloc(sizeof(StackNode));
-    //insert the node at stack top
-     if (newPtr != NULL)
+    // insert the node at stack top
+    if (newPtr != NULL)
     {
         newPtr->data = info;
         newPtr->nextPtr = *topPtr;
