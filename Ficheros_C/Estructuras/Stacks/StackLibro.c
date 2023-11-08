@@ -2,7 +2,7 @@
 // A simple stack program
 #include <stdio.h>
 #include <stdlib.h>
-//     self -  referential structure
+// self -  referential structure
 struct stackNode
 {
     int data;                  // define data as an int
