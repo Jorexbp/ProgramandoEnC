@@ -10,48 +10,45 @@ struct nodo
 // Pop del top
 
 
-void push(struct nodo *, int);
+struct nodo * push(struct nodo *, int);
 int pop(struct nodo *);
 void printStack(struct nodo *);
 int main()
 {
 
-   struct nodo topPtr;
-   
-     
-   
-    push(&topPtr, 10);
-  push(&topPtr,25);
+   struct nodo *topPtr;
+        
+  topPtr = push(topPtr, 10);
+   topPtr =  push(topPtr,25);
 
-    printStack(&topPtr);
+    printStack(topPtr);
 
     return 0;
 }
 
-void push(struct nodo *topPtr, int data)
+struct nodo *  push(struct nodo *topPtr, int data)
 {
     //  (struct nodo *)
     struct nodo *nuevo = malloc(sizeof(struct nodo));
     if (nuevo != NULL)
     {
         nuevo->data = data;
-    //
         nuevo->nextNodo = topPtr;
-
-
-
-    //
-        *topPtr = *nuevo;
+        topPtr = nuevo;
+        return topPtr;
        
     }
 }
 
 void printStack(struct nodo *Stack)
 {
-    while (Stack->nextNodo != NULL)
+    int pos = 1;
+    printf("\n");
+    while (Stack != NULL)
     {
-        printf("%s%d\n", "Valor: ", Stack->data);
+        printf("%d ---> ",Stack->data);
         Stack = Stack->nextNodo;
         
     }
+    printf("%s","NULL\n");
 }
