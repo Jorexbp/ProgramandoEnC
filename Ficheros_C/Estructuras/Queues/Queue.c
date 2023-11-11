@@ -1,77 +1,87 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 struct nodo
 {
     int data;              // Valor del nodo
     struct nodo *nextNodo; // Ptr al siguiente nodo
 };
 
-struct nodo *push(struct nodo *, int); // Push al bottom
-struct nodo *pop(struct nodo *);       // Pop del top
+void add(struct nodo *, int); // Push al bottom
+void pop(struct nodo *);      // Pop del top
 void printStack(struct nodo *);
 int main()
 {
- struct nodo *topPtr; // Primero nodo NULL
-    topPtr = push(topPtr,10);
-  
-  
-    topPtr = push(topPtr,25);
-    topPtr = push(topPtr,97);
-  
+    struct nodo *topPtr = (struct nodo *)malloc(sizeof(struct nodo));
+
+    topPtr->data = 42;
+    topPtr->nextNodo = NULL;
+
+    add(topPtr, 10);
+
+    add(topPtr, 25);
+    add(topPtr, 97);
 
     printStack(topPtr);
-    
-    
+    pop(topPtr);
+    printStack(topPtr);
+
     return 0;
 }
 
+void add(struct nodo *current, int valor)
+{
+    struct nodo *temp;
+    temp = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
 
-struct nodo *push(struct nodo *topPtr, int data)
-{
-    //  (struct nodo *)
-    struct nodo *nuevo = malloc(sizeof(struct nodo)); // Espacio en memoria para el nodo
-    if (nuevo != NULL)                                // Si se ha podido alocar en memoria
+    temp->data = valor;    // En la temporal asigno el valor
+    temp->nextNodo = NULL; // Como va a ser el ultimo nodo de la LinkedList no apunta a nada
+
+    while (current->nextNodo != NULL) // Recorro todo el LinkedList hasta encontrar un enlace que sea NULL
     {
-        nuevo->data = data;     
-        nuevo->nextNodo = NULL; 
-       
-        if(topPtr == NULL)
-        {
-            topPtr = nuevo;
-        }else{
-            while(topPtr->nextNodo != NULL){
-                topPtr = topPtr->nextNodo;
-            }
-            topPtr->nextNodo = nuevo;
-        }
-       
-        return topPtr;
+        current = current->nextNodo; // Una vez encontrado, asigna el nodo al nodo que tiene el link NULL
     }
+    current->nextNodo = temp; // A ese nodo con el link NULL, le cambio el enlace por la direccion de la variable temporal que ya tiene los datos
 }
-struct nodo *pop(struct nodo *topPtr)
+void pop(struct nodo *current)
 {
-    if (topPtr != NULL)
-    {                                                      // Si el nodo no es NULL
-        printf("%s%d\n", "Valor popeado: ", topPtr->data); // Antes de popear muestro la info quitada
-        topPtr = topPtr->nextNodo;                         // Para quitar un nodo, muevo el top del Stack al puntero del siguiente nodo del top
+    if (current != NULL)
+    {
+        struct nodo *temp = (struct nodo *)malloc(sizeof(struct nodo));
+        temp = current;
+        while (current->nextNodo != NULL) // Recorro todo el LinkedList hasta encontrar un enlace que sea NULL
+        {
+            // Una vez encontrado, asigna el nodo al nodo que tiene el link NULL
+            if (temp->nextNodo->nextNodo == NULL)
+            {
+                printf("%s%d", "\nValor popeado: ", temp->nextNodo->data);
+                temp->nextNodo = NULL;
+                current = temp;
+                break;
+            }
+            else
+            {
+                temp = current->nextNodo;
+                current = temp;
+            }
+        }
     }
     else
     {
         printf("%s", "//////////////\nNO EXISTEN VALORES\n//////////////\n");
     }
-    return topPtr;
 }
 
 void printStack(struct nodo *Stack)
 {
     int pos = 1;
     printf("\n");
+    printf("%s", "NULL ");
     while (Stack != NULL) // Mientras que haya nodos
     {
-        printf("%d ---> ", Stack->data); // Muestra la info del nodo
-        Stack = Stack->nextNodo; // Para al siguiente nodo mediante el puntero
+        printf("<--- %d ", Stack->data); // Muestra la info del nodo
+        Stack = Stack->nextNodo;         // Para al siguiente nodo mediante el puntero
     }
-    printf("%s", "NULL\n");
+
+    printf("\n");
 }

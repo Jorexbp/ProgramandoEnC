@@ -28,9 +28,10 @@ int main()
 
     cabeza = insertarAlInicio(cabeza, 100); // Pongo que la cabeza sea otro nodo que he creado para que se posicione antes
 
-    insertarAlFinal(cabeza, 20); // Inserto en al final cuestión de la cabeza un nodo
+    insertarAlFinal(cabeza, 20); // Inserto en al final en cuestión de la cabeza un nodo
 
     insertarAlFinal(cabeza, 79);
+    insertarAlFinal(cabeza, 125);
 
     while (cabeza != NULL) // Mientras que el link no sea NULL itera
     {
@@ -55,17 +56,15 @@ struct nodo *insertarAlInicio(struct nodo *cabeza, int valor)
 
 void insertarAlFinal(struct nodo *current, int valor)
 {
-    struct nodo *nuevoPtr, *temp;
-
-    nuevoPtr = current;                                // El nuevo nodo es el pasado por parametro
+    struct nodo  *temp;
     temp = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
 
     temp->datos = valor; // En la temporal asigno el valor
     temp->link = NULL;   // Como va a ser el ultimo nodo de la LinkedList no apunta a nada
 
-    while (nuevoPtr->link != NULL) // Recorro todo el LinkedList hasta encontrar un enlace que sea NULL
+    while (current->link != NULL) // Recorro todo el LinkedList hasta encontrar un enlace que sea NULL
     {
-        nuevoPtr = nuevoPtr->link; // Una vez encontrado, asigna el nodo al nodo que tiene el link NULL
+        current = current->link; // Una vez encontrado, asigna el nodo al nodo que tiene el link NULL
     }
-    nuevoPtr->link = temp; // A ese nodo con el link NULL, le cambio el enlace por la direccion de la variable temporal que ya tiene los datos
+    current->link = temp; // A ese nodo con el link NULL, le cambio el enlace por la direccion de la variable temporal que ya tiene los datos
 }
