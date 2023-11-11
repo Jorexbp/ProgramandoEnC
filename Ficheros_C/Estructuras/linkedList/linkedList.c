@@ -6,7 +6,7 @@ struct nodo
     int datos;
     struct nodo *link;
 };
-struct nodo *insertarAlInicio(struct nodo *, int);
+void insertarAlInicio(struct nodo **, int);
 void insertarAlFinal(struct nodo *, int);
 
 int main()
@@ -26,7 +26,7 @@ int main()
 
     cabeza->link = current; // Al enlace de la cabeza, le paso el siguiente nodo
 
-    cabeza = insertarAlInicio(cabeza, 100); // Pongo que la cabeza sea otro nodo que he creado para que se posicione antes
+    insertarAlInicio(&cabeza, 100); // Pongo que la cabeza sea otro nodo que he creado para que se posicione antes
 
     insertarAlFinal(cabeza, 20); // Inserto en al final en cuestión de la cabeza un nodo
 
@@ -42,16 +42,16 @@ int main()
     return 0;
 }
 
-struct nodo *insertarAlInicio(struct nodo *cabeza, int valor)
+void insertarAlInicio(struct nodo **cabeza, int valor)
 {
     struct nodo *nuevoPtr = (struct nodo *)malloc(sizeof(struct nodo)); // En este guardare el que este señalando en el momento correspondiente
 
     nuevoPtr->datos = valor; // Valor que haya pasado
     nuevoPtr->link = NULL;
 
-    nuevoPtr->link = cabeza; // El enlace del nuevo nodo llevará a la cabeza que era antes
-    cabeza = nuevoPtr;       // La cabeza es ahora el nuevo nodo
-    return cabeza;
+    nuevoPtr->link = *cabeza; // El enlace del nuevo nodo llevará a la cabeza que era antes
+    *cabeza = nuevoPtr;       // La cabeza es ahora el nuevo nodo
+   
 }
 
 void insertarAlFinal(struct nodo *current, int valor)

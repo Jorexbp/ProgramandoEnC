@@ -8,12 +8,11 @@ struct nodo
 };
 
 void add(struct nodo *, int); // Push al bottom
-void pop(struct nodo *);      // Pop del top
+void pop(struct nodo **);      // Pop del top
 void printQueue(struct nodo *);
 int main()
 {
     struct nodo *topPtr = (struct nodo *)malloc(sizeof(struct nodo));
-    topPtr->data = NULL;
     topPtr->nextNodo = NULL;
 
 
@@ -33,7 +32,7 @@ int usuario = 0;
             add(topPtr, n);
             break;
         case 2:
-            pop(topPtr);
+            pop(&topPtr);
             break;
         case 3:
             break;
@@ -53,8 +52,6 @@ void add(struct nodo *current, int valor)
     temp->data = valor;    // En la temporal asigno el valor
     temp->nextNodo = NULL; // Como va a ser el ultimo nodo de la LinkedList no apunta a nada
 
-
-
     while (current->nextNodo != NULL) // Recorro todo el LinkedList hasta encontrar un enlace que sea NULL
     {
         current = current->nextNodo; // Una vez encontrado, asigna el nodo al nodo que tiene el link NULL
@@ -62,28 +59,12 @@ void add(struct nodo *current, int valor)
     current->nextNodo = temp; // A ese nodo con el link NULL, le cambio el enlace por la direccion de la variable temporal que ya tiene los datos
 
 }
-void pop(struct nodo *current)
+void pop(struct nodo **current)
 {
-    if (current != NULL)
+    if ((*current) != NULL)
     {
-        struct nodo *temp = (struct nodo *)malloc(sizeof(struct nodo));
-        temp = current;
-        while (current->nextNodo != NULL) // Recorro todo el LinkedList hasta encontrar un enlace que sea NULL
-        {
-            // Una vez encontrado, asigna el nodo al nodo que tiene el link NULL
-            if (temp->nextNodo->nextNodo == NULL)
-            {
-                printf("%s%d", "\nValor popeado: ", temp->nextNodo->data);
-                temp->nextNodo = NULL;
-                current = temp;
-                break;
-            }
-            else
-            {
-                temp = current->nextNodo;
-                current = temp;
-            }
-        }
+        printf("%s%d\n","Valor popeado: ",(*current)->nextNodo->data);
+        *current = (*current)->nextNodo;
     }
     else
     {
