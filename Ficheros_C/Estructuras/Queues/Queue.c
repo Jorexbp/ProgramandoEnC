@@ -14,14 +14,9 @@ int main()
 {
     struct nodo *topPtr = NULL;
 
-    add(&topPtr, 1);
 
-    add(&topPtr, 2);
 
-    add(&topPtr, 3);
-    printQueue(topPtr);
-
-    /*
+    
     int usuario = 0;
          do
         {
@@ -46,7 +41,7 @@ int main()
                 printf("Valor no valido\n");
             }
         } while (usuario != 3);
-        */
+        
 
     return 0;
 }
@@ -55,23 +50,27 @@ void add(struct nodo **current, int valor)
 {
     struct nodo *temp;
     temp = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
-
+    struct nodo *cambio;
+    cambio = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
+    cambio = *current;
     temp->data = valor;    // En la temporal asigno el valor
     temp->nextNodo = NULL; // Como va a ser el ultimo nodo de la LinkedList no apunta a nada
 
     if ((*current) == NULL)
     {
-        (*current) = (struct nodo *)malloc(sizeof(struct nodo));
         (*current) = temp;
     }
     else
     {
-        while ((*current)->nextNodo != NULL) 
+        while (1)
         {
-            (*current) = (*current)->nextNodo; 
+            if ((cambio)->nextNodo == NULL)
+            {
+                (cambio)->nextNodo = temp;
+                break;
+            }
+            (cambio) = (cambio)->nextNodo;
         }
-        (*current)->nextNodo = temp; 
-       
     }
 }
 void pop(struct nodo **current)
