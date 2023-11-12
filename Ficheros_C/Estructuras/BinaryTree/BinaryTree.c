@@ -9,19 +9,18 @@ struct nodo
     int data;
 };
 
-void insertarNodo(struct nodo **, int value); // Se insertan izq menor que el padre y dch mayor 
-void inOrder(struct nodo *); // Recorre los hijos de menor a mayor y los padres respectivamente
-void reverseOrder(struct nodo *); 
-void preOrder(struct nodo *); // Primero padre luego hijo
+void insertarNodo(struct nodo **, int value); // Se insertan izq menor que el padre y dch mayor
+void inOrder(struct nodo *);                  // Recorre los hijos de menor a mayor y los padres respectivamente
+void reverseOrder(struct nodo *);
+void preOrder(struct nodo *);  // Primero padre luego hijo
 void postOrder(struct nodo *); // Primero hijo luego padre
-
 int main()
 {
 
     struct nodo *arbol = NULL;
 
     srand(time(NULL));
-    printf("%s","Los numeros a introducir en el arbol son:\n");
+    printf("%s", "Los numeros a introducir en el arbol son:\n");
 
     for (int i = 0; i < 10; i++)
     {
@@ -29,74 +28,72 @@ int main()
         printf("%3d\n", item);
         insertarNodo(&arbol, item);
     }
-    printf("%s","Arbol inOrder\n");  
+    printf("%s", "Arbol inOrder\n");
     inOrder(arbol);
 
-    printf("%s","\nArbol reverseOrder\n");  
+    printf("%s", "\nArbol reverseOrder\n");
     reverseOrder(arbol);
-   
-    printf("%s","\nArbol preOrder\n");
+
+    printf("%s", "\nArbol preOrder\n");
     preOrder(arbol);
 
-    printf("%s","\nArbol postOrder\n");
+    printf("%s", "\nArbol postOrder\n");
     postOrder(arbol);
-
     return 0;
 }
 
-
 void insertarNodo(struct nodo **Arbol, int valor)
 {
-    struct nodo *nuevoNodo = (struct nodo *) malloc(sizeof(struct nodo));
+    struct nodo *nuevoNodo = (struct nodo *)malloc(sizeof(struct nodo));
     nuevoNodo->data = valor;
-    nuevoNodo->nodoDch = NULL; 
+    nuevoNodo->nodoDch = NULL;
     nuevoNodo->nodoIzq = NULL;
-    if(*Arbol == NULL) // Si no existe el arbol
+    if (*Arbol == NULL) // Si no existe el arbol
     {
-        *Arbol = (struct nodo *) malloc(sizeof(struct nodo));
+        *Arbol = (struct nodo *)malloc(sizeof(struct nodo));
         *Arbol = nuevoNodo;
     }
     else
     {
-        if(valor < (*Arbol)->data)
+        if (valor < (*Arbol)->data)
         {
             insertarNodo(&((*Arbol)->nodoIzq), valor);
-        }else if(valor > (*Arbol)->data)
+        }
+        else if (valor > (*Arbol)->data)
         {
             insertarNodo(&((*Arbol)->nodoDch), valor);
-        }else
+        }
+        else
         {
-            printf("%s%d\n","\nValor duplicado: ",valor);
+            printf("%s%d\n", "\nValor duplicado: ", valor);
         }
     }
-
-
 }
 
 void inOrder(struct nodo *Arbol)
 {
-    if(Arbol != NULL)
+    if (Arbol != NULL)
     {
         inOrder(Arbol->nodoIzq);
-        printf("%3d ",Arbol->data);
+        printf("%3d ", Arbol->data);
         inOrder(Arbol->nodoDch);
     }
 }
 void reverseOrder(struct nodo *Arbol)
 {
-    if(Arbol != NULL)
+    if (Arbol != NULL)
     {
         reverseOrder(Arbol->nodoDch);
-        printf("%3d ",Arbol->data);
+        printf("%3d ", Arbol->data);
         reverseOrder(Arbol->nodoIzq);
     }
 }
 
 void preOrder(struct nodo *Arbol)
 {
-    if(Arbol != NULL)
+    if (Arbol != NULL)
     {
-        printf("%3d ",Arbol->data);
+        printf("%3d ", Arbol->data);
         preOrder(Arbol->nodoIzq);
         preOrder(Arbol->nodoDch);
     }
@@ -104,11 +101,10 @@ void preOrder(struct nodo *Arbol)
 
 void postOrder(struct nodo *Arbol)
 {
-    if(Arbol != NULL)
+    if (Arbol != NULL)
     {
         postOrder(Arbol->nodoIzq);
         postOrder(Arbol->nodoDch);
-         printf("%3d ",Arbol->data);
-
+        printf("%3d ", Arbol->data);
     }
 }
