@@ -48,11 +48,10 @@ int main()
 
 void add(struct nodo **current, int valor)
 {
-    struct nodo *temp;
-    temp = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
-    struct nodo *cambio;
-    cambio = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
+    struct nodo *temp = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
+    struct nodo *cambio = (struct nodo *)malloc(sizeof(struct nodo)); // Inicializa la variable temporal
     cambio = *current;
+    
     temp->data = valor;    // En la temporal asigno el valor
     temp->nextNodo = NULL; // Como va a ser el ultimo nodo de la LinkedList no apunta a nada
 
@@ -64,12 +63,12 @@ void add(struct nodo **current, int valor)
     {
         while (1)
         {
-            if ((cambio)->nextNodo == NULL)
+            if (cambio->nextNodo == NULL)
             {
-                (cambio)->nextNodo = temp;
+                cambio->nextNodo = temp;
                 break;
             }
-            (cambio) = (cambio)->nextNodo;
+            cambio = cambio->nextNodo;
         }
     }
 }
