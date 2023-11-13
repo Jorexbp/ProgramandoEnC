@@ -38,7 +38,7 @@ int main()
     preOrder(arbol);
 
     printf("%s", "\nArbol postOrder\n");
-    postOrder(arbol);
+    postOrder(arbol);   
     return 0;
 }
 
