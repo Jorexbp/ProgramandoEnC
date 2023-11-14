@@ -3,9 +3,9 @@
 
 struct nodoHash
 {
-    int value;   // 4
-    int key;     // 4
-    struct nodoHash* link;
+    int value; // 4
+    int key;   // 4
+    struct nodoHash *link;
 };               // 8
 int TAMANO = 10; // El tamaño deberia ser primo para asegurar que los numeros se distribuyan de manera uniforme
 
@@ -23,14 +23,15 @@ int cambiarPrimo(int capacidad);
 int main()
 {
     int valorTamano = 0;
-    printf("%s","Introduzca un tamano para el HashTable:\n");
-    scanf("%d",&valorTamano);
+    printf("%s", "Introduzca un tamano para el HashTable:\n");
+    scanf("%d", &valorTamano);
     TAMANO = valorTamano;
     struct nodoHash *HashTable = iniciarHashTable();
     int operacion = 2;
     do
-    { operacion = instrucciones();
-        
+    {
+        operacion = instrucciones();
+
         switch (operacion)
         {
         case 1:
@@ -49,7 +50,7 @@ int main()
 
             break;
         }
-       
+
     } while (operacion != 0);
     return 0;
 }
@@ -82,29 +83,28 @@ void insertarValor(struct nodoHash *HashTable, int llave, int valor)
     {
         printf("%s\n", "Colision!!");
         struct nodoHash *nodoLinked = (struct nodoHash *)malloc(sizeof(struct nodoHash));
-        if((*HashTable).link == NULL)
+        if ((*HashTable).link == NULL)
         {
             nodoLinked->key = NULL;
             nodoLinked->value = valor;
             nodoLinked->link = NULL;
             (*HashTable).link = nodoLinked;
-        }else
+        }
+        else
         {
             nodoLinked = HashTable;
 
-            while(nodoLinked->link != NULL)
+            while (nodoLinked->link != NULL)
             {
                 nodoLinked = nodoLinked->link;
             }
-             struct nodoHash *masNodos = (struct nodoHash *)malloc(sizeof(struct nodoHash));
-             masNodos->key = NULL;
+            struct nodoHash *masNodos = (struct nodoHash *)malloc(sizeof(struct nodoHash));
+            masNodos->key = NULL;
             masNodos->value = valor;
             masNodos->link = NULL;
-            
-            nodoLinked ->link = masNodos;
 
+            nodoLinked->link = masNodos;
         }
-        
     }
 }
 
@@ -116,10 +116,12 @@ void eliminarElemento(struct nodoHash *HashTable, int llave)
 
         HashTable++;
     }
-    if((*HashTable).value = 0)
+    if ((*HashTable).value = 0)
     {
-        printf("%s","Valor inexistente\n");
-    }else{
+        printf("%s", "Valor inexistente\n");
+    }
+    else
+    {
         (*HashTable).value = 0;
         (*HashTable).link = NULL;
     }
@@ -127,7 +129,7 @@ void eliminarElemento(struct nodoHash *HashTable, int llave)
 
 void reiniciarHashTable(struct nodoHash *HashTable)
 {
-    TAMANO =cambiarPrimo(TAMANO);
+    TAMANO = cambiarPrimo(TAMANO);
     for (int i = 0; i < TAMANO; i++)
     {
         (*HashTable).key = funcionHash(i);
@@ -139,19 +141,19 @@ void reiniciarHashTable(struct nodoHash *HashTable)
 
 void mostrarHashTable(struct nodoHash *HashTable)
 {
-     struct nodoHash *nodoLinked;
+    struct nodoHash *nodoLinked;
     for (int i = 0; i < TAMANO; i++)
     {
         printf("%s%d%s%d", "Llave: ", (HashTable)->key, " Valor: ", (HashTable)->value);
-       nodoLinked = (HashTable)->link;
-           
-       while((HashTable)->link != NULL && nodoLinked != NULL)
+        nodoLinked = (HashTable)->link;
+
+        while ((HashTable)->link != NULL && nodoLinked != NULL)
         {
-            printf("%s%d"," --> ",nodoLinked->value);
+            printf("%s%d", " --> ", nodoLinked->value);
             nodoLinked = nodoLinked->link;
         }
-        
-        printf("%s","\n");
+
+        printf("%s", "\n");
         HashTable++;
     }
 }
@@ -188,7 +190,7 @@ int pedirValor()
 }
 int instrucciones()
 {
-    printf("%s","\nIntroduzca que operacion quiere hacer:\n0.Salir\n1.Insertar\n2.Mostrar\n3.Eliminar\n4.Reiniciar\n");
+    printf("%s", "\nIntroduzca que operacion quiere hacer:\n0.Salir\n1.Insertar\n2.Mostrar\n3.Eliminar\n4.Reiniciar\n");
     int oper = 0;
     scanf("%d", &oper);
     return oper;
