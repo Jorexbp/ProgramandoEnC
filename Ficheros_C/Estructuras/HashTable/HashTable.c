@@ -18,6 +18,7 @@ void eliminarElemento(struct nodoHash *, int);
 int pedirLlave();
 int pedirValor();
 int instrucciones();
+int cambiarPrimo(int capacidad);
 int main()
 {
     struct nodoHash *HashTable = iniciarHashTable();
@@ -25,7 +26,6 @@ int main()
     do
     {
         operacion = instrucciones();
-        printf("Operacion: %d",operacion);
         switch (operacion)
         {
         case 1:
@@ -86,11 +86,17 @@ void eliminarElemento(struct nodoHash *HashTable, int llave)
 
         HashTable++;
     }
-    (*HashTable).value = 0;
+    if((*HashTable).value = 0)
+    {
+        printf("%s","Valor inexistente\n");
+    }else{
+        (*HashTable).value = 0;
+    }
 }
 
 void reiniciarHashTable(struct nodoHash *HashTable)
 {
+    TAMANO =cambiarPrimo(TAMANO);
     for (int i = 0; i < TAMANO; i++)
     {
         (*HashTable).key = funcionHash(i);
@@ -140,8 +146,21 @@ int pedirValor()
 }
 int instrucciones()
 {
-    printf("Introduzca que operacion quiere hacer:\n0.Salir\n1.Insertar\n2.Mostrar\n3.Eliminar\n4.Reiniciar\n");
+    printf("%s","\nIntroduzca que operacion quiere hacer:\n0.Salir\n1.Insertar\n2.Mostrar\n3.Eliminar\n4.Reiniciar\n");
     int oper = 0;
-    scanf("%d", oper);
+    scanf("%d", &oper);
     return oper;
+}
+
+int cambiarPrimo(int capacidad)
+{
+    if (capacidad % 2 == 0)
+    {
+        capacidad++;
+    }
+    while (esPrimo(capacidad) != 1)
+    {
+        capacidad += 2;
+    }
+    return capacidad;
 }

@@ -34,15 +34,15 @@ int checkPrime(int n)
 }
 int getPrime(int n)
 {
-    if (n % 2 == 0)
-    {
-        n++;
-    }
-    while (!checkPrime(n))
-    {
-        n += 2;
-    }
-    return n;
+        if (n % 2 == 0)
+        {
+            n++;
+        }
+        while (!checkPrime(n))
+        {
+            n += 2;
+        }
+        return n;
 }
 void init_array()
 {
