@@ -1,171 +1,147 @@
-// Implementing hash table in C
-
 #include <stdio.h>
 #include <stdlib.h>
 
-struct set
+struct nodoHash
 {
-  int key;
-  int data;
-};
-struct set *array;
-int capacity = 10;
-int size = 0;
+    int value;   // 4
+    int key;     // 4
+};               // 8
+int TAMANO = 10; // El tamaño deberia ser primo para asegurar que los numeros se distribuyan de manera uniforme
 
-int hashFunction(int key)
-{
-  return (key % capacity);
-}
-int checkPrime(int n)
-{
-  int i;
-  if (n == 1 || n == 0)
-  {
-  return 0;
-  }
-  for (i = 2; i < n / 2; i++)
-  {
-  if (n % i == 0)
-  {
-    return 0;
-  }
-  }
-  return 1;
-}
-int getPrime(int n)
-{
-  if (n % 2 == 0)
-  {
-  n++;
-  }
-  while (!checkPrime(n))
-  {
-  n += 2;
-  }
-  return n;
-}
-void init_array()
-{
-  capacity = getPrime(capacity);
-  array = (struct set *)malloc(capacity * sizeof(struct set));
-  for (int i = 0; i < capacity; i++)
-  {
-  array[i].key = 0;
-  array[i].data = 0;
-  }
-}
-
-void insert(int key, int data)
-{
-  int index = hashFunction(key);
-  if (array[index].data == 0)
-  {
-  array[index].key = key;
-  array[index].data = data;
-  size++;
-  printf("\n Key (%d) has been inserted \n", key);
-  }
-  else if (array[index].key == key)
-  {
-  array[index].data = data;
-  }
-  else
-  {
-  printf("\n Collision occured  \n");
-  }
-}
-
-void remove_element(int key)
-{
-  int index = hashFunction(key);
-  if (array[index].data == 0)
-  {
-  printf("\n This key does not exist \n");
-  }
-  else
-  {
-  array[index].key = 0;
-  array[index].data = 0;
-  size--;
-  printf("\n Key (%d) has been removed \n", key);
-  }
-}
-void display()
-{
-  int i;
-  for (i = 0; i < capacity; i++)
-  {
-  if (array[i].data == 0)
-  {
-    printf("\n array[%d]: / ", i);
-  }
-  else
-  {
-    printf("\n key: %d array[%d]: %d \t", array[i].key, i, array[i].data);
-  }
-  }
-}
-
-int size_of_hashtable()
-{
-  return size;
-}
-
+int funcionHash(int);
+void reiniciarHashTable(struct nodoHash *);
+void mostrarHashTable(struct nodoHash *);
+void insertarValor(struct nodoHash *, int, int);
+int esPrimo(int);
+struct nodoHash *iniciarHashTable();
+void eliminarElemento(struct nodoHash *, int);
+int pedirLlave();
+int pedirValor();
+int instrucciones();
 int main()
 {
-  int choice, key, data, n;
-  int c = 0;
-  init_array();
+    struct nodoHash *HashTable = iniciarHashTable();
+    int operacion = 0;
+    do
+    {
+        operacion = instrucciones();
+        printf("Operacion: %d",operacion);
+        switch (operacion)
+        {
+        case 1:
+            insertarValor(HashTable, pedirLlave(), pedirValor());
+            break;
+        case 2:
+            mostrarHashTable(HashTable);
+            break;
+        case 3:
+            eliminarElemento(HashTable, pedirLlave());
+            break;
+        case 4:
+            reiniciarHashTable(HashTable);
+            break;
+        default:
 
-  do
-  {
-  printf("1.Insert item in the Hash Table"
-     "\n2.Remove item from the Hash Table"
-     "\n3.Check the size of Hash Table"
-     "\n4.Display a Hash Table"
-     "\n\n Please enter your choice: ");
+            break;
+        }
+    } while (operacion != 0);
+    return 0;
+}
 
-  scanf("%d", &choice);
-  switch (choice)
-  {
-  case 1:
+struct nodoHash *iniciarHashTable()
+{
+    struct nodoHash *HashTable = (struct nodoHash *)malloc(TAMANO * sizeof(struct nodoHash));
 
-    printf("Enter key -:\t");
-    scanf("%d", &key);
-    printf("Enter data -:\t");
-    scanf("%d", &data);
-    insert(key, data);
+    reiniciarHashTable(HashTable);
+    return (HashTable);
+}
+void insertarValor(struct nodoHash *HashTable, int llave, int valor)
+{
+    int b = 1;
+    llave = funcionHash(llave);
+    for (int i = 0; i < llave; i++)
+    {
 
-    break;
+        HashTable++;
+    }
+    if ((*HashTable).value != 0)
+    {
+        b = 0;
+    }
+    if (b == 1)
+    {
+        (*HashTable).value = valor;
+    }
+    else
+    {
+        printf("%s\n", "Colision!!");
+    }
+}
 
-  case 2:
+void eliminarElemento(struct nodoHash *HashTable, int llave)
+{
+    llave = funcionHash(llave);
+    for (int i = 0; i < llave; i++)
+    {
 
-    printf("Enter the key to delete-:");
-    scanf("%d", &key);
-    remove_element(key);
+        HashTable++;
+    }
+    (*HashTable).value = 0;
+}
 
-    break;
+void reiniciarHashTable(struct nodoHash *HashTable)
+{
+    for (int i = 0; i < TAMANO; i++)
+    {
+        (*HashTable).key = funcionHash(i);
+        (*HashTable).value = 0;
+        HashTable++;
+    }
+}
 
-  case 3:
+void mostrarHashTable(struct nodoHash *HashTable)
+{
+    for (int i = 0; i < TAMANO; i++)
+    {
+        printf("%s%d%s%d\n", "Llave: ", (HashTable)->key, " Valor: ", (HashTable)->value);
+        HashTable++;
+    }
+}
 
-    n = size_of_hashtable();
-    printf("Size of Hash Table is-:%d\n", n);
+int funcionHash(int llave)
+{
+    return (llave % TAMANO);
+}
 
-    break;
+int esPrimo(int n) // 0 = no , 1 = si
+{
+    for (int i = 2; i <= n / 2; ++i)
+    {
 
-  case 4:
+        if (n % i == 0)
+            return 0;
+    }
+    return 1;
+}
 
-    display();
-
-    break;
-
-  default:
-
-    printf("Invalid Input\n");
-  }
-
-  printf("\nDo you want to continue (press 1 for yes): ");
-  scanf("%d", &c);
-
-  } while (c == 1);
+int pedirLlave()
+{
+    printf("%s", "Introduzca la llave:\n");
+    int llave;
+    scanf("%d", &llave);
+    return llave;
+}
+int pedirValor()
+{
+    printf("%s", "Introduzca el valor:\n");
+    int valor;
+    scanf("%d", &valor);
+    return valor;
+}
+int instrucciones()
+{
+    printf("Introduzca que operacion quiere hacer:\n0.Salir\n1.Insertar\n2.Mostrar\n3.Eliminar\n4.Reiniciar\n");
+    int oper = 0;
+    scanf("%d", oper);
+    return oper;
 }
