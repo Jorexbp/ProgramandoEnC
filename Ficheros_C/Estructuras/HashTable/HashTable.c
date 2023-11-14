@@ -21,11 +21,14 @@ int instrucciones();
 int cambiarPrimo(int capacidad);
 int main()
 {
+    int valorTamano = 0;
+    printf("%s","Introduzca un tamano para el HashTable:\n");
+    scanf("%d",&valorTamano);
+    TAMANO = valorTamano;
     struct nodoHash *HashTable = iniciarHashTable();
-    int operacion = 0;
+    int operacion = 2;
     do
     {
-        operacion = instrucciones();
         switch (operacion)
         {
         case 1:
@@ -44,6 +47,8 @@ int main()
 
             break;
         }
+        operacion = instrucciones();
+        
     } while (operacion != 0);
     return 0;
 }
