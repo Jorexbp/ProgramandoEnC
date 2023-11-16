@@ -124,7 +124,8 @@ void eliminarElemento(struct nodoHash *HashTable, int llave)
     {
         if((*HashTable).link != NULL)
         {
-            (HashTable) = (*HashTable).link;
+            (*HashTable).value = (*HashTable).link->value;
+            (*HashTable).link = (*HashTable).link->link;
         }else
         {
             (*HashTable).value = 0; // ACABANDO DE AL ELIMINAR PASAR LOS OTROA SU LUGAR
@@ -170,7 +171,7 @@ int funcionHash(int llave)
 
 int esPrimo(int n) // 0 = no , 1 = si
 {
-1    for (int i = 2; i <= n / 2; ++i)
+    for (int i = 2; i <= n / 2; ++i)
     {
 
         if (n % i == 0)
