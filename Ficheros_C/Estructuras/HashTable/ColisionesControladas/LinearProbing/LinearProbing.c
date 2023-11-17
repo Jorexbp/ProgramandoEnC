@@ -84,7 +84,7 @@ void insertarValor(struct nodoHash *HashTable, int llave, int valor)
     {
         //(struct nodoHash *HashTable, int llave, int valor)
         printf("%s\n", "Colision!!");
-         (*HashTable).value = valor;
+        (*HashTable).value = valor;
           
     }
       
