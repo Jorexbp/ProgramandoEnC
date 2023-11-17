@@ -128,7 +128,7 @@ void eliminarElemento(struct nodoHash *HashTable, int llave)
             (*HashTable).link = (*HashTable).link->link;
         }else
         {
-            (*HashTable).value = 0; // ACABANDO DE AL ELIMINAR PASAR LOS OTROA SU LUGAR
+            (*HashTable).value = 0; 
         }
     }
 }
