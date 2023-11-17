@@ -18,7 +18,8 @@
         "new": "c",
         "*.tcc": "c",
         "cstdint": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "doublehashing": "c"
     },
     "git.autofetch": "all"
 }

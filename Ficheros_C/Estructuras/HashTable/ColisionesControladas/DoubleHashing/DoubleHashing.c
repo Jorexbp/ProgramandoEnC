@@ -9,6 +9,7 @@ struct nodoHash
 int TAMANO = 10; // El tamaño deberia ser primo para asegurar que los numeros se distribuyan de manera uniforme
 
 int funcionHash(int);
+int otraFuncionHash(int);
 void reiniciarHashTable(struct nodoHash *);
 void mostrarHashTable(struct nodoHash *);
 void insertarValor(struct nodoHash *, int);
@@ -79,7 +80,7 @@ void insertarValor(struct nodoHash *HashTable, int valor)
             HashTable--;
         }
         // NUEVA FORMULA
-        llave = (funcionHash(valor));
+        llave = funcionHash((funcionHash(valor)+ k * (otraFuncionHash(valor))));
 
         // END NUEVA FORMULA
         for (int i = 0; i < llave; i++)
@@ -139,6 +140,10 @@ void mostrarHashTable(struct nodoHash *HashTable)
 int funcionHash(int llave)
 {
     return (llave % TAMANO);
+}
+int otraFuncionHash(int llave)
+{
+    return (llave % (TAMANO-2))+1;
 }
 
 int esPrimo(int n) // 0 = no , 1 = si
