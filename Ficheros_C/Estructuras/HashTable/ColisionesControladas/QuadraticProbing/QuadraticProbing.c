@@ -22,8 +22,8 @@ int cambiarPrimo(int capacidad);
 int main()
 {
     int valorTamano = 0;
-    printf("%s","Introduzca un tamano para el HashTable:\n");
-    scanf("%d",&valorTamano);
+    printf("%s", "Introduzca un tamano para el HashTable:\n");
+    scanf("%d", &valorTamano);
     TAMANO = valorTamano;
     struct nodoHash *HashTable = iniciarHashTable();
     int operacion = 2;
@@ -48,7 +48,7 @@ int main()
             break;
         }
         operacion = instrucciones();
-        
+
     } while (operacion != 0);
     return 0;
 }
@@ -64,7 +64,7 @@ void insertarValor(struct nodoHash *HashTable, int llave, int valor)
 {
     int b = 1;
     llave = funcionHash(llave);
-     printf("%s%d -> ","Nueva llave: ",llave);
+    printf("%s%d -> ", "Nueva llave: ", llave);
 
     for (int i = 0; i < llave; i++)
     {
@@ -75,18 +75,18 @@ void insertarValor(struct nodoHash *HashTable, int llave, int valor)
     while ((*HashTable).value != 0)
     {
         b = 0;
-             for (int i = 0; i < llave; i++)
-    {
+        for (int i = 0; i < llave; i++)
+        {
 
-        HashTable--;
-    }
+            HashTable--;
+        }
         llave += pow(k, 2);
         for (int i = 0; i < llave; i++)
-    {
+        {
 
-        HashTable++;
-    }
-    k++;
+            HashTable++;
+        }
+        k++;
     }
     if (b == 1)
     {
@@ -96,10 +96,8 @@ void insertarValor(struct nodoHash *HashTable, int llave, int valor)
     {
         //(struct nodoHash *HashTable, int llave, int valor)
         printf("%s\n", "Colision!!");
-       (*HashTable).value = valor;
+        (*HashTable).value = valor;
     }
-      
-
 }
 
 void eliminarElemento(struct nodoHash *HashTable, int llave)
@@ -110,17 +108,19 @@ void eliminarElemento(struct nodoHash *HashTable, int llave)
 
         HashTable++;
     }
-    if((*HashTable).value = 0)
+    if ((*HashTable).value = 0)
     {
-        printf("%s","Valor inexistente\n");
-    }else{
+        printf("%s", "Valor inexistente\n");
+    }
+    else
+    {
         (*HashTable).value = 0;
     }
 }
 
 void reiniciarHashTable(struct nodoHash *HashTable)
 {
-    TAMANO =cambiarPrimo(TAMANO);
+    TAMANO = cambiarPrimo(TAMANO);
     for (int i = 0; i < TAMANO; i++)
     {
         (*HashTable).key = funcionHash(i);
@@ -170,7 +170,7 @@ int pedirValor()
 }
 int instrucciones()
 {
-    printf("%s","\nIntroduzca que operacion quiere hacer:\n0.Salir\n1.Insertar\n2.Mostrar\n3.Eliminar\n4.Reiniciar\n");
+    printf("%s", "\nIntroduzca que operacion quiere hacer:\n0.Salir\n1.Insertar\n2.Mostrar\n3.Eliminar\n4.Reiniciar\n");
     int oper = 0;
     scanf("%d", &oper);
     return oper;
