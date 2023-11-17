@@ -15,7 +15,7 @@ void insertarValor(struct nodoHash *, int);
 int esPrimo(int);
 struct nodoHash *iniciarHashTable();
 void eliminarElemento(struct nodoHash *, int);
-
+int pedirLlave();
 int pedirValor();
 int instrucciones();
 int cambiarPrimo(int capacidad);
@@ -64,17 +64,30 @@ void insertarValor(struct nodoHash *HashTable, int valor)
 {
     int b = 1;
    int  llave = funcionHash(valor);
-     printf("%s%d -> ","Nueva llave: ",llave);
-
     for (int i = 0; i < llave; i++)
     {
 
         HashTable++;
     }
+    int k = 1;
     while ((*HashTable).value != 0)
     {
         b = 0;
-        HashTable++;
+        for (int i = 0; i < llave; i++)
+        {
+
+            HashTable--;
+        }
+        // NUEVA FORMULA
+        llave = (funcionHash(valor));
+
+        // END NUEVA FORMULA
+        for (int i = 0; i < llave; i++)
+        {
+
+            HashTable++;
+        }
+        k++;
     }
     if (b == 1)
     {
@@ -82,13 +95,9 @@ void insertarValor(struct nodoHash *HashTable, int valor)
     }
     else
     {
-        //(struct nodoHash *HashTable, int llave, int valor)
         printf("%s\n", "Colision!!");
-        (*HashTable).value = valor;
-          
+         (*HashTable).value = valor;
     }
-      
-
 }
 
 void eliminarElemento(struct nodoHash *HashTable, int llave)

@@ -11,7 +11,7 @@ int TAMANO = 10; // El tamaño deberia ser primo para asegurar que los numeros s
 int funcionHash(int);
 void reiniciarHashTable(struct nodoHash *);
 void mostrarHashTable(struct nodoHash *);
-void insertarValor(struct nodoHash *, int, int);
+void insertarValor(struct nodoHash *, int);
 int esPrimo(int);
 struct nodoHash *iniciarHashTable();
 void eliminarElemento(struct nodoHash *, int);
@@ -32,7 +32,7 @@ int main()
         switch (operacion)
         {
         case 1:
-            insertarValor(HashTable, pedirLlave(), pedirValor());
+            insertarValor(HashTable,  pedirValor());
             break;
         case 2:
             mostrarHashTable(HashTable);
@@ -60,10 +60,10 @@ struct nodoHash *iniciarHashTable()
     reiniciarHashTable(HashTable);
     return (HashTable);
 }
-void insertarValor(struct nodoHash *HashTable, int llave, int valor)
+void insertarValor(struct nodoHash *HashTable, int valor)
 {
     int b = 1;
-    llave = funcionHash(llave);
+   int llave = funcionHash(valor);
     printf("%s%d -> ", "Nueva llave: ", llave);
 
     for (int i = 0; i < llave; i++)
